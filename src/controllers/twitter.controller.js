@@ -1,35 +1,35 @@
 'use strict';
-const News = require('../models/news.model');
+const Twitter = require('../models/twitter.model');
 
 exports.findAll = function(req, res) {
-News.findAll(function(err, news) {
+Twitter.findAll(function(err, twitter) {
   console.log('controller')
   if (err)
   res.send(err);
-  console.log('res', news);
-  res.send(news);
+  console.log('res', twitter);
+  res.send(twitter);
 });
 };
 
 exports.create = function(req, res) {
-const new_news = new News(req.body);
+const new_twitter = new Twitter(req.body);
 //handles null error
 if(req.body.constructor === Object && Object.keys(req.body).length === 0){
   res.status(400).send({ error:true, message: 'Please provide all required field' });
 }else{
-News.create(new_news, function(err, news) {
+Twitter.create(new_twitter, function(err, twitter) {
   if (err)
   res.send(err);
-  res.json({error:false,message:"News added successfully!",data:news});
+  res.json({error:false,message:"Twitter added successfully!",data:twitter});
 });
 }
 };
 
 exports.findById = function(req, res) {
-News.findById(req.params.id, function(err, news) {
+Twitter.findById(req.params.id, function(err, twitter) {
   if (err)
   res.send(err);
-  res.json(news);
+  res.json(twitter);
 });
 };
 
@@ -37,18 +37,18 @@ exports.update = function(req, res) {
   if(req.body.constructor === Object && Object.keys(req.body).length === 0){
     res.status(400).send({ error:true, message: 'Please provide all required field' });
   }else{
-    News.update(req.params.id, new News(req.body), function(err, news) {
+    Twitter.update(req.params.id, new Twitter(req.body), function(err, twitter) {
    if (err)
    res.send(err);
-   res.json({ error:false, message: 'News successfully updated' });
+   res.json({ error:false, message: 'Twitter successfully updated' });
 });
 }
 };
 
 exports.delete = function(req, res) {
-News.delete( req.params.id, function(err, news) {
+Twitter.delete( req.params.id, function(err, twitter) {
   if (err)
   res.send(err);
-  res.json({ error:false, message: 'News successfully deleted' });
+  res.json({ error:false, message: 'Twitter successfully deleted' });
 });
 };
