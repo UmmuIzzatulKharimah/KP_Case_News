@@ -14,7 +14,7 @@ var Twitter = function(twitter){
 };
 
 Twitter.create = function (data, result) {
-dbConn.query("INSERT INTO tabel_twitter set ?", data, function (err, res) {
+dbConn.query("INSERT INTO tabel_twitter set ? ", data, function (err, res) {
 if(err) {
   console.log("error: ", err);
   result(err, null);
@@ -39,6 +39,7 @@ else{
 };
 
 Twitter.findAll = function (result) {
+// dbConn.query("Select * from tabel_twitter LIMIT 30", function (err, res) {
 dbConn.query("Select * from tabel_twitter", function (err, res) {
 if(err) {
   console.log("error: ", err);
